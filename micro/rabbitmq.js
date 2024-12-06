@@ -7,8 +7,8 @@ require("dotenv").config();
   `amqp://${process.env.RABBITUSER}:${process.env.RABBITPASS}@178.32.226.75:${process.env.RABBITPORT}`,
 ]; */
 
-const rabbitmqServer = `${process.env.RABBITHOST}:${process.env.RABBITPORT}`;
-//const rabbitmqServer = `${process.env.RABBITHOST}`;
+//const rabbitmqServer = `${process.env.RABBITHOST}:${process.env.RABBITPORT}`;
+const rabbitmqServer = `${process.env.RABBITHOST}`;
 const routingKeys = ["*.order.*", "*.payment.*"];
 
 class RabbitServer {
@@ -109,7 +109,7 @@ class RabbitServer {
       if (err) {
         // Error handling and moving to next server if unable to connect
         console.error(
-          `Failed to connect to RabbitMQ at ${server}:`,
+          `Failed to connect to RabbitMQ at ${rabbitmqServer}:`,
           err.message
         );
 

@@ -49,7 +49,7 @@ const io = new Server(server, {
 })
 
 const routerHandler = new RouterHandler(io)
-//const rabbitmq = new RabbitServer(io)
+const rabbitmq = new RabbitServer(io)
 
 
 //Cors middleware
@@ -67,7 +67,7 @@ io.use((socket, next) => {
     next();
 })
 
-server.listen(PORT/*, "0.0.0.0"*/ ,  async() => {
+server.listen(PORT, "0.0.0.0" ,  async() => {
     try{
         console.log(`App listening on port ${PORT}`)
         mongoose.connect(`${dbURI}/${dbName}?authSource=admin&retryWrites=true&w=majority`)
@@ -75,9 +75,9 @@ server.listen(PORT/*, "0.0.0.0"*/ ,  async() => {
         mongoose.connection.once("open", () => {
             console.log("Connection with database has been made!");
             //init rabbitmq consumer
-            /*rabbitmq.initServer(() => {
+            rabbitmq.initServer(() => {
                 console.log("Rabbitmq is online")
-            }) */
+            }) 
         })
 
         io.on('connection', (socket) => {

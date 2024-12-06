@@ -7,8 +7,6 @@ WORKDIR /app
 COPY package*.json ./
 COPY .env ./
 
-RUN npm install -g npm@latest
-
 RUN npm install
 
 # Bundle app source
